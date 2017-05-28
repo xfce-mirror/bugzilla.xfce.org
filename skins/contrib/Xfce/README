@@ -1,0 +1,18 @@
+This skin is not only a customization layer for CSS; it also includes some
+templates specific to it. These templates create three new files under
+template/en/custom:
+  - templatename.html.tmpl, which executes a simple IF
+  - templatename_DEFAULT.html.tmpl, which is a symlink back to the
+    appropriate default template
+  - templatename_XFCE.html.tmpl, which includes all of the Xfce skin changes
+
+Note: There are a few custom templates that are used to override templates
+for all themes in the Xfce Bugzilla. These are:
+  - index.html.tmpl
+  - global/banner.html.tmpl
+  - global/header.html.tmpl
+  - list/table.html.tmpl
+
+In addition to the CSS files and templates, this skin includes a JavaScript
+file, which is included in the global/header.html.tmpl file; please make
+sure this is kept included when you modify the header template.

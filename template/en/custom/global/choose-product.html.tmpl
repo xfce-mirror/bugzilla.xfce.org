@@ -1,0 +1,5 @@
+[% IF user.settings.skin.value == 'Xfce' %]
+  [% PROCESS 'global/choose-product_XFCE.html.tmpl' %]
+[% ELSE %]
+  [% PROCESS 'global/choose-product_DEFAULT.html.tmpl' %]
+[% END %]

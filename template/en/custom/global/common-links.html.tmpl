@@ -1,0 +1,5 @@
+[% IF user.settings.skin.value == 'Xfce' %]
+  [% PROCESS 'global/common-links_XFCE.html.tmpl' %]
+[% ELSE %]
+  [% PROCESS 'global/common-links_DEFAULT.html.tmpl' %]
+[% END %]

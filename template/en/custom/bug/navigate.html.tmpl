@@ -1,0 +1,5 @@
+[% IF user.settings.skin.value == 'Xfce' %]
+  [% PROCESS 'bug/navigate_XFCE.html.tmpl' %]
+[% ELSE %]
+  [% PROCESS 'bug/navigate_DEFAULT.html.tmpl' %]
+[% END %]

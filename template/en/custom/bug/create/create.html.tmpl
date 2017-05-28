@@ -1,0 +1,5 @@
+[% IF user.settings.skin.value == 'Xfce' %]
+  [% INCLUDE bug/create/create_XFCE.html.tmpl %]
+[% ELSE %]
+  [% INCLUDE bug/create/create_DEFAULT.html.tmpl %]
+[% END %]

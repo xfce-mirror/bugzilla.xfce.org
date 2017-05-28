@@ -1,0 +1,5 @@
+[% IF user.settings.skin.value == 'Xfce' %]
+  [% PROCESS 'bug/edit_XFCE.html.tmpl' %]
+[% ELSE %]
+  [% PROCESS 'bug/edit_DEFAULT.html.tmpl' %]
+[% END %]

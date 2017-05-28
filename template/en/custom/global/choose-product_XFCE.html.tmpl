@@ -1,0 +1,73 @@
+[%# INTERFACE:
+  # classifications: array of hashes, with an 'object' key representing a
+  #                  classification object and 'products' the list of
+  #                  product objects the user can enter bugs into.
+  # target:   the script that displays this template.
+  #%]
+
+[% IF target == "enter_bug.cgi" %]
+  [% title = "Enter $terms.Bug" %]
+  [% subheader = "Select Product" %]
+  [% h2 = BLOCK %]
+    [% IF Param('useclassification') %]Next[% ELSE %]First[% END %],
+    you must pick a product (and component) on which to enter [% terms.abug %]:
+  [% END %]
+[% ELSIF target == "describecomponents.cgi" %]
+  [% title = "Browse" %]
+  [% h2 = "Select a product category to browse:" %]
+[% END %]
+
+[% DEFAULT title = "Choose a Product" %]
+[% PROCESS global/header.html.tmpl %]
+
+[% USE Bugzilla %]
+[% previous_params = Bugzilla.cgi.canonicalise_query('classification', 'product') %]
+
+<h2>[% h2 FILTER html %]</h2>
+
+[% IF target == 'describecomponents.cgi' %]
+  <ul class="product_categories">
+  [% FOREACH c = classifications %]
+    [% IF c.object %]
+      <li><a class="action-link" href="#cat-[% c.object.id %]">[% c.object.name FILTER html %]</a></li>
+    [% END %]
+  [% END %]
+  </ul>
+  <hr />
+[% END %]
+
+[% IF target == "describecomponents.cgi" %][% url_base = "buglist.cgi" %][% ELSE %][% url_base = target %][% END %]
+
+[% FOREACH c = classifications %]
+  [% IF c.object %]
+    <h3 class="product_cat" id="cat-[% c.object.id %]">[% c.object.name FILTER html %]</h3>
+    <p>[% c.object.description FILTER html %]</p>
+  [% END %]
+
+  <ul class="products">
+    [% FOREACH p = c.products %]
+      <li>
+        <strong>
+          [% p.name FILTER html %]
+        </strong>
+        <div>
+          [% p.description FILTER html %]<br />
+          <span class="product_components">
+            [% IF target == 'describecomponents.cgi' && p.components.size > 1 %]
+              <a class="component-all" href="[% url_base %]?product=[% p.name FILTER uri %]&amp;resolution=---[% IF previous_params %]&amp;[% previous_params FILTER none %][% END %]">All components</a> &nbsp;
+            [% END %]
+            [% IF p.components.size == 1 %]
+              <a href="[% url_base %]?product=[% p.name FILTER uri %]&amp;component=[% p.components.item(0).name FILTER uri %]&amp;resolution=---[% IF previous_params %]&amp;[% previous_params FILTER none %][% END %]">[% p.name %]</a>
+            [% ELSE %]
+              [% FOREACH comp = p.components %]
+                <a class="component-[% comp.name FILTER uri %]" href="[% url_base %]?product=[% p.name FILTER uri %]&amp;component=[% comp.name FILTER uri %]&amp;resolution=---[% IF previous_params %]&amp;[% previous_params FILTER none %][% END %]">[% comp.name %]</a> &nbsp; 
+              [% END %]
+            [% END %]
+          </span>
+        </div>
+      </li>
+    [% END %]
+  </ul>
+[% END %]
+
+[% PROCESS global/footer.html.tmpl %]

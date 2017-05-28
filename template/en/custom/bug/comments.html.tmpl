@@ -1,0 +1,5 @@
+[% IF user.settings.skin.value == 'Xfce' %]
+  [% PROCESS 'bug/comments_XFCE.html.tmpl' %]
+[% ELSE %]
+  [% PROCESS 'bug/comments_DEFAULT.html.tmpl' %]
+[% END %]

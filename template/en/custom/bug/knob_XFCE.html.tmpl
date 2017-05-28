@@ -1,0 +1,103 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+
+<div class="flex-split">
+  [% IF bug.choices.bug_status.size > 1 && bug.check_can_change_field('resolution', bug.resolution, 1) %]
+    <select id="status_resolution" name="status_resolution">
+      [% FOREACH status = bug.choices.bug_status %]
+        [% IF status.name == 'RESOLVED' %]
+          [% FOREACH resolution = bug.choices.resolution %]
+            <option value="RESOLVED-[% resolution.name FILTER html %]"
+              [% IF bug.resolution.contains(resolution.name).size %]
+                selected="selected"
+              [% ELSIF bug AND !resolution.is_visible_on_bug(bug) %]
+                class="bz_hidden_option" disabled="disabled"
+              [% END %]>
+              [% status.name FILTER html %]: [% resolution.name FILTER html %] [% IF resolution.name == 'DUPLICATE' %]...[% END %]</option>
+          [% END %]
+        [% ELSE %]
+          <option value="[% status.name FILTER html %]"
+            [% IF bug.bug_status.contains(status.name).size %]
+              selected="selected"
+            [% ELSIF bug AND !status.is_visible_on_bug(bug) %]
+              class="bz_hidden_option" disabled="disabled"
+            [% END %]>
+            [% status.name FILTER html %]
+          </option>
+        [% END %]
+      [% END %]
+    </select>
+  [% ELSE %]
+    <span class="select">
+      [% bug.bug_status FILTER html %][% IF bug.resolution %]: [% bug.resolution FILTER html %][% END %]
+    </span>
+  [% END %]
+
+  <input id="dup_id" name="dup_id" size="6" value="[% bug.dup_id FILTER html %]" placeholder="[% terms.bug %] #" style="display: none;"
+    [% IF !bug.check_can_change_field('dup_id', 0, 1) %]
+      disabled="disabled"
+    [% END %]
+  />
+
+  <input type="hidden" name="bug_status" id="bug_status" value="[% bug.bug_status %]" />
+  <input type="hidden" name="resolution" id="resolution" value="[% bug.bug_resolution %]" />
+</div>
+
+<script type="text/javascript">
+  var strs = document.getElementById('status_resolution');
+  var strs_opt = strs.options[strs.selectedIndex];
+  strs.className = strs_opt.value;
+
+  [% IF bug.dup_id && bug.resolution == 'DUPLICATE' %]
+    document.getElementById('dup_id').style.display = 'inline';
+  [% END %]
+
+  strs.addEventListener('change', function() {
+    var strs_opt = strs.options[strs.selectedIndex];
+    var strs_value = strs_opt.value.split('-');
+    if( strs_value.length == 1 ) {
+      if( strs_value[0] == 'VERIFIED' || strs_value[0] == 'CLOSED' ) {
+        strs_value[1] = 'FIXED';
+      } else {
+        strs_value[1] = '';
+      }
+    }
+
+    document.getElementById('bug_status').value = strs_value[0];
+    document.getElementById('resolution').value = strs_value[1];
+    strs.className = strs_opt.value;
+
+    if( strs_value[1] == 'DUPLICATE' ) {
+      document.getElementById('dup_id').style.display = 'block';
+    } else {
+      document.getElementById('dup_id').style.display = 'none';
+    }
+  });
+</script>
+<noscript>
+  [% PROCESS bug/field.html.tmpl
+      no_tds = 1
+      field  = bug_fields.bug_status
+      value  = bug.bug_status
+      override_legal_values = bug.choices.bug_status
+      editable = bug.choices.bug_status.size > 1
+  %]
+  [% PROCESS bug/field.html.tmpl
+      no_tds = 1
+      field  = bug_fields.resolution
+      value  = bug.resolution
+      override_legal_values = bug.choices.resolution
+      editable = bug.check_can_change_field('resolution', bug.resolution, 1)
+  %]
+
+  <input id="dup_id" name="dup_id" size="6" value="[% bug.dup_id FILTER html %]" placeholder="[% terms.bug %] #"
+    [% IF !bug.check_can_change_field('dup_id', 0, 1) %]
+      disabled="disabled"
+    [% END %]
+  />
+</noscript>
