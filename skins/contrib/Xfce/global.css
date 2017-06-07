@@ -259,6 +259,13 @@ input[type="checkbox"] {
 			.links.links-primary {
 				float: left;
 			}
+			#header .links.links-secondary {
+				float: right;
+				padding: 0.45em 1em;
+			}
+				.links.links-secondary li {
+					padding: 0.45em 0;
+				}
 
 /*
  *  Bug navigation and messages
