@@ -1,0 +1,36 @@
+table,
+table.tabs {
+	border-collapse: collapse;
+}
+	table.tabs td {
+		padding: 0;
+		border-color: rgba( 0, 0, 0, 0.6 );
+	}
+	table.tabs td.spacer {
+		width: 1em;
+	}
+		table.tabs td a {
+			display: block;
+			padding: 1em 0.5em;
+			border-left: 2px solid #fff;
+			border-right: 2px solid #fff;
+		}
+
+.tabbody table,
+.tabbody th,
+.tabbody td {
+	border: 1px solid rgba( 0, 0, 0, 0.3 ) !important;
+}
+	.tabbody th,
+	.tabbody td {
+		padding: 0.3em 0.5em;
+	}
+
+	.tabbody hr {
+		display: none;
+	}
+
+.column_header {
+	background-color: #00a8dd;
+	color: #fff;
+}

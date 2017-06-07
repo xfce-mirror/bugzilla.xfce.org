@@ -149,7 +149,7 @@ body #comments pre.bz_comment_text * {
 			font-weight: bold;
 		}
 		.bz_comment_text {
-			width: auto !important;
+			width: 100%;
 			padding: 0 1em 1em 1em;
 		}
 .comment_tab {

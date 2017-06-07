@@ -17,6 +17,12 @@ a:hover, a:active, a:focus {
 	color: #06c;
 	text-decoration: none;
 }
+	a.no-color:link, a.no-color:visited {
+		color: #000;
+	}
+	a.no-color:hover, a.no-color:active, a.no-color:focus {
+		color: #06c;
+	}
 
 body pre,
 body pre * {
@@ -186,14 +192,15 @@ input[type="checkbox"] {
 		}
 	#header .links-dropdown ul {
 		position: absolute;
-		top: 0;
+		top: 2.3em;
 		right: 0;
-		padding-top: 2.4em;
 		display: none;
+		border: 1px solid rgba( 0, 0, 0, 0.2 );
 		box-shadow: 0 0 0.2em rgba( 0, 0, 0, 0.1 );
 	}
 		#header .links-dropdown:hover ul {
-			min-width: 200px;
+			min-width: 150px;
+			width: 100%;
 			display: block;
 		}
 	#header .links-dropdown li.main ul li {
@@ -438,6 +445,21 @@ tr.bz_row_odd {
 	line-height: 2.5em;
 }
 
+/*  Search description  */
+
+.search_description {
+	line-height: 2em;
+}
+.search_description li {
+	white-space: nowrap;
+}
+
+/*  Bug list  */
+
+.bz_buglist a {
+	display: block;
+}
+
 /*  Common styles  */
 a.bz_closed, a.bz_closed:link, a.bz_closed:visited,
 a.bz_closed:hover, a.bz_closed:active, a.bz_closed:focus  {
@@ -445,7 +467,7 @@ a.bz_closed:hover, a.bz_closed:active, a.bz_closed:focus  {
 }
 
 /* Bug statuses */
-.bz_bugitem .bz_bug_status_column {
+.bz_bugitem .bz_short_desc_column {
 	position: relative;
 }
 	.bz_bugitem .bz_bug_status_column span {
@@ -474,15 +496,21 @@ a.bz_closed:hover, a.bz_closed:active, a.bz_closed:focus  {
 	}
 
 .bz_bugitem.bz_ASSIGNED .bz_bug_status_column span,
-.bz_bugitem.bz_NEEDINFO .bz_bug_status_column span,
-#status_resolution.ASSIGNED,
-#status_resolution.NEEDINFO {
-        background-color: rgba( 210, 150, 30, 1 );
+#status_resolution.ASSIGNED {
+        background-color: rgba( 220, 200, 50, 1 );
         color: #fff;
 }
-	#status_resolution.ASSIGNED:hover,
+	#status_resolution.ASSIGNED:hover {
+		background-color: rgba( 240, 220, 70, 1 );
+	}
+
+.bz_bugitem.bz_NEEDINFO .bz_bug_status_column span,
+#status_resolution.NEEDINFO {
+        background-color: rgba( 235, 90, 0, 1 );
+        color: #fff;
+}
 	#status_resolution.NEEDINFO:hover {
-		background-color: rgba( 230, 170, 50, 1 );
+		background-color: rgba( 255, 110, 20, 1 );
 	}
 
 .bz_bugitem.bz_CLOSED .bz_bug_status_column span,
@@ -546,32 +574,33 @@ a.bz_closed:hover, a.bz_closed:active, a.bz_closed:focus  {
 	color: inherit;
 	font-weight: normal;
 }
-	.bz_critical .bz_bug_status_column:after,
-	.bz_blocker .bz_bug_status_column:after {
-		position: absolute;
-		content: "!";
-		right: -1.5em;
-		padding: 0.15em 0.4em;
-		border-radius: 0.2em;
-		background-color: rgba( 210, 0, 0, 1 );
-		color: #fff;
-		font-weight: bold;
+	.bz_critical .bz_short_desc_column,
+	.bz_blocker .bz_short_desc_column {
+		padding-left: 2em;
 	}
-		.bz_critical .bz_resolution_column,
-		.bz_blocker .bz_resolution_column {
-			color: transparent;
+		.bz_critical .bz_short_desc_column:before,
+		.bz_blocker .bz_short_desc_column:before {
+			position: absolute;
+			content: "!";
+			left: 0.4em;
+			top: 0.4em;
+			padding: 0.15em 0.4em;
+			border-radius: 0.2em;
+			background-color: rgba( 210, 0, 0, 1 );
+			color: #fff;
+			font-weight: bold;
 		}
 
-	.bz_CLOSED .bz_bug_status_column:after,
-	.bz_RESOLVED .bz_bug_status_column:after,
-	.bz_VERIFIED .bz_bug_status_column:after {
+	.bz_CLOSED .bz_short_desc_column:before,
+	.bz_RESOLVED .bz_short_desc_column:before,
+	.bz_VERIFIED .bz_short_desc_column:before {
 		display: none;
 	}
-		.bz_CLOSED .bz_resolution_column,
-		.bz_RESOLVED .bz_resolution_column,
-		.bz_VERIFIED .bz_resolution_column {
-			color: inherit;
-		}
+	.bz_CLOSED .bz_short_desc_column,
+	.bz_RESOLVED .bz_short_desc_column,
+	.bz_VERIFIED .bz_short_desc_column {
+		padding-left: 0;
+	}
 
 
 @media screen and (max-width: 1100px) {
