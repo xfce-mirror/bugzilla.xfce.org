@@ -74,7 +74,7 @@
   'nowordssubstr', 'notmatches', 'isempty', 'isnotempty'
 ] %]
 
-<h2>Search results ([% bugs.size %] bugs)</h2>
+<h2>Search results ([% bugs.size %] bug[% IF bugs.size != 1 %]s[% END %])</h2>
 [% IF default_limited AND bugs.size >= Param('default_search_limit') %]
   <p>This result was limited to [% Param('default_search_limit') FILTER html %] [%+ terms.bugs %].
     <a href="buglist.cgi?[% urlquerypart FILTER html %]
@@ -96,7 +96,21 @@
     [% END %]
     [% IF debug %]
       (<code>[% desc_item.term FILTER html %]</code>)
-   [% END %]
+    [% END %]
+
+    [% IF !Bugzilla.cgi.param('namedcmd') %]
+      [% FOREACH p = Bugzilla.cgi.param() %]
+        [% IF Bugzilla.cgi.param(p) == desc_item.field %]
+          [% field_param = p %]
+        [% END %]
+      [% END %]
+      [% IF desc_item.field == 'assigned_to' || desc_item.field == 'cc' || desc_item.field == 'qa_contact' || desc_item.field == 'reporter' %]
+        [% previous_params = Bugzilla.cgi.canonicalise_query('email' _ desc_item.field _ '1', 'email' _ desc_item.field _ '2', 'email' _ desc_item.field _ '3', field_param) %]
+      [% ELSE %]
+        [% previous_params = Bugzilla.cgi.canonicalise_query(desc_item.field, field_param) %]
+      [% END %]
+      [% IF previous_params %] &nbsp; <a class="action-link" href="buglist.cgi?[% previous_params %]">Remove&nbsp;filter[% IF desc_item.value.split(',').size > 1 %]s[% END %]</a>[% END %]
+    [% END %]
   </li>
 [% END %]
 </ul>
