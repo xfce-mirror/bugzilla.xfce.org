@@ -1,4 +1,4 @@
-body * {
+#bugzilla-body * {
 	font-family: 'Noto Sans', sans-serif !important;
 	box-sizing: border-box;
 }
@@ -111,6 +111,9 @@ input[type="checkbox"] {
 	input[type="checkbox"]:checked {
 		opacity: 1;
 	}
+	#header input[type="checkbox"] {
+		float: none;
+	}
 
 
 /*
@@ -126,6 +129,7 @@ input[type="checkbox"] {
 		position: fixed;
 		top: 0;
 		z-index: 2000;
+		box-shadow: 0 0 0.1em rgba( 0, 0, 0, 0.4 );
 	}
 	#header #titles {
 		/* Used in the default template... */
@@ -192,7 +196,7 @@ input[type="checkbox"] {
 		}
 	#header .links-dropdown ul {
 		position: absolute;
-		top: 2.3em;
+		top: 2.1em;
 		right: 0;
 		display: none;
 		border: 1px solid rgba( 0, 0, 0, 0.2 );
@@ -606,7 +610,7 @@ a.bz_closed:hover, a.bz_closed:active, a.bz_closed:focus  {
 	.bz_CLOSED .bz_short_desc_column,
 	.bz_RESOLVED .bz_short_desc_column,
 	.bz_VERIFIED .bz_short_desc_column {
-		padding-left: 0;
+		padding-left: 0.4em;
 	}
 
 
