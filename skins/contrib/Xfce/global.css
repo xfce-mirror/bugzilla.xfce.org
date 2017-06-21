@@ -1,34 +1,67 @@
+/*
+ *  Additional styles for bugzilla.xfce.org
+ *
+ */
+
 #bugzilla-body * {
 	font-family: 'Noto Sans', sans-serif !important;
 	box-sizing: border-box;
 }
 
-.group:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
-	font-size: 0;
+a.no-color:link, a.no-color:visited {
+	color: #000;
 }
-
-a, a:link, a:visited,
-a:hover, a:active, a:focus {
-	color: #06c;
-	text-decoration: none;
-}
-	a.no-color:link, a.no-color:visited {
-		color: #000;
-	}
 	a.no-color:hover, a.no-color:active, a.no-color:focus {
 		color: #06c;
 	}
 
-body pre,
-body pre * {
+/*  Links dressed as buttons  */
+
+.action-link,
+.comment_tab,
+.bz_query_buttons #xml {
+	border-radius: 0.2em;
+	border: 1px solid rgba( 0, 0, 0, 0.2 );
+	background: #f7f7f7 linear-gradient( to bottom, rgba( 255, 255, 255, 0.5 ), rgba( 0, 0, 0, 0.02 ) 1px, rgba( 0, 0, 0, 0.05 ) ) repeat-x;
+	color: #000;
+	padding: 0.2em 0.5em;
+	outline: none !important;
+	transition: 150ms all;
+}
+	a.action-link:hover,
+	.comment_tab:hover {
+		background-color: #fff;
+	}
+	a.action-link {
+        	font-size: 85%;
+	        line-height: 1em;
+		color: #000;
+	}
+        	.action-link:hover, .action-link:active, .action-link:focus,
+		.comment_tab:hover, .comment_tab:active, .comment_tab:focus {
+        	        color: #06c;
+		}
+
+/*
+ *  Move to main stylesheets?
+ *
+ */
+
+#main * {
+	font-family: 'Noto Sans', sans-serif !important;
+	box-sizing: border-box; /* do we want this? */
+}
+
+#main pre,
+#main pre * {
 	font-family: 'Noto Mono', monospace !important;
 	font-size: 100%;
 }
+
+/*
+ *  Not checked
+ *
+ */
 
 hr {
 	clear: both;
@@ -40,81 +73,6 @@ hr {
 	hr + * {
 		margin-top: 0;
 	}
-
-/*
- *  Form stuff and links dressed as buttons
- *
- */
-
-/*.yui-skin-sam .yui-button a, */
-.action-link,
-.comment_tab,
-input[type="submit"],
-.bz_query_buttons #xml,
-button,
-select {
-	border-radius: 0.2em;
-	border: 1px solid rgba( 0, 0, 0, 0.2 );
-	background: #f7f7f7 linear-gradient( to bottom, rgba( 255, 255, 255, 0.5 ), rgba( 0, 0, 0, 0.02 ) 1px, rgba( 0, 0, 0, 0.05 ) ) repeat-x;
-	color: #000;
-	padding: 0.2em 0.5em;
-	outline: none !important;
-	transition: 150ms all;
-}
-	.yui-skin-sam .yui-button a:hover,
-	a.action-link:hover,
-	.comment_tab:hover,
-	input[type="submit"]:hover,
-	button:hover,
-	select:hover {
-		background-color: #fff;
-	}
-	.yui-skin-sam .yui-button a,
-	a.action-link {
-        	font-size: 85%;
-	        line-height: 1em;
-		color: #000;
-	}
-	        .yui-skin-sam .yui-button a:hover, .yui-skin-sam .yui-button a:active, .yui-skin-sam .yui-button a:focus,
-        	.action-link:hover, .action-link:active, .action-link:focus,
-		.comment_tab:hover, .comment_tab:active, .comment_tab:focus {
-        	        color: #06c;
-		}
-	select {
-        	-moz-appearance: none;
-	        -webkit-appearance: none;
-        	appearance: none;
-	}
-
-input,
-input[type="text"],
-textarea {
-	background-color: #f7f7f7;
-	color: #000;
-	border-radius: 0.2em;
-	border: 1px solid rgba( 0, 0, 0, 0.2 );
-	padding: 0.2em 0.5em;
-}
-	input[type="file"] { border: none; }
-	textarea {
-		font-size: 90%;
-	}
-
-input[type="checkbox"] {
-	float: left;
-	display: block;
-	opacity: 0.75;
-	margin-top: 0.15em;
-	margin-right: 0.5em;
-	transition: 150ms all;
-}
-	input[type="checkbox"]:checked {
-		opacity: 1;
-	}
-	#header input[type="checkbox"] {
-		float: none;
-	}
-
 
 /*
  *  Header
@@ -225,11 +183,6 @@ input[type="checkbox"] {
 			background-color: rgba( 255, 255, 255, 0.5 );
 			color: #000;
 		}
-
-@media screen and (max-width:800px)Â{
-}
-
-
 
 #header .links {
 	padding: 0.25em 1em;

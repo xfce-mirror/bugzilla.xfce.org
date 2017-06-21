@@ -5,7 +5,7 @@
 
 #bug-header {
 	display: flex;
-	padding: 1em 0 0.4em 0;
+	padding: 0 0 0.4em 0;
 	font-weight: normal;    
 
 	border-bottom: 1px solid rgba( 0, 0, 0, 0.4 );
@@ -163,6 +163,14 @@ body #comments pre.bz_comment_text * {
 #add_comment #comment {
 	width: 100%;
 }
+	#add_comment table,
+	#add_comment table tr,
+	#add_comment table td,
+	#add_comment table th {
+		border: none !important;
+		padding: 0;
+	}
+
 
 /*  Commit buttons  */
 #commit_top,
