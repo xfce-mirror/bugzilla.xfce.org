@@ -40,6 +40,7 @@ a.no-color:link, a.no-color:visited {
         	.action-link:hover, .action-link:active, .action-link:focus,
 		.comment_tab:hover, .comment_tab:active, .comment_tab:focus {
         	        color: #06c;
+			text-decoration: none;
 		}
 
 /*
@@ -154,7 +155,7 @@ hr {
 		}
 	#header .links-dropdown ul {
 		position: absolute;
-		top: 2.1em;
+		top: 2.3em;
 		right: 0;
 		display: none;
 		border: 1px solid rgba( 0, 0, 0, 0.2 );
@@ -223,6 +224,11 @@ hr {
 				.links.links-secondary li {
 					padding: 0.45em 0;
 				}
+#header a:hover,
+#header a:active,
+#header a:focus {
+	text-decoration: none;
+}
 
 /*
  *  Bug navigation and messages
@@ -420,6 +426,10 @@ tr.bz_row_odd {
 
 /*  Bug list  */
 
+.bz_buglist {
+	margin: 2em 0;
+}
+
 .bz_buglist a {
 	display: block;
 }
@@ -538,6 +548,10 @@ a.bz_closed:hover, a.bz_closed:active, a.bz_closed:focus  {
 	color: inherit;
 	font-weight: normal;
 }
+	.bz_blocker,
+	.bz_critical {
+		color: rgba( 210, 0, 0, 1 );
+	}
 	.bz_critical .bz_short_desc_column,
 	.bz_blocker .bz_short_desc_column {
 		padding-left: 2em;
