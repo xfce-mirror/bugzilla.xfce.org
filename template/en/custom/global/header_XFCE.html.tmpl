@@ -95,6 +95,8 @@
 
     [% SET yui = yui_resolve_deps(yui, yui_deps) %]
 
+    [%# TODO: Do not include the main CSS files; they only make us do overrides with !important %]
+    [%# We are still however depending on some of the declarations there so it's not trivial to drop this dependency %]
     [% SET css_sets = css_files(style_urls, yui, yui_css) %]
     [% IF constants.CONCATENATE_ASSETS %]
       [% PROCESS format_css_link asset_url = css_sets.unified_standard_skin %]
@@ -132,9 +134,6 @@
     [% FOREACH asset_url = concatenate_js(starting_js_urls) %]
       [% PROCESS format_js_link %]
     [% END %]
-
-    <link rel="stylesheet" media="screen" type="text/css" href="/skins/header.css" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/skins/xfce.css" />
 
     <link rel="stylesheet" media="screen" type="text/css" href="https://xfce.org/style/css.php?site=bugzilla" />
 
@@ -234,6 +233,7 @@
 
   <div id="header-wrap">
     <div id="header">
+<!--
       <div id="titles">
         <span id="title">Xfce [% terms.Bugzilla %][% " &ndash; $header" IF header %]</span>
 
@@ -245,6 +245,7 @@
           <span id="information" class="header_addl_info">[% header_addl_info %]</span>
         [% END %]
       </div>
+-->
 
       [% USE Bugzilla %]
       [% IF Bugzilla.languages.size > 1 %]
@@ -270,6 +271,8 @@
       </div>
     </div>
   </div>
+
+  [% PROCESS bug/navigate.html.tmpl %]
 
   <div id="bugzilla-body">
     [% IF Param('announcehtml') %]
