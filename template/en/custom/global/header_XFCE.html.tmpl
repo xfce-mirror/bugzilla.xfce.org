@@ -35,10 +35,8 @@
   javascript_urls = []
   yui = []
   generate_api_token = 0
-  favicon_url = "skins/contrib/Xfce/favicon.ico"
+  favicon_url = "//cdn.xfce.org/images/favicon.ico"
 %]
-
-[%# favicon_url = "https://cdn.xfce.org/style/favicon.ico" %]
 
 [% SET yui_css = {
   autocomplete => 1,
@@ -135,7 +133,7 @@
       [% PROCESS format_js_link %]
     [% END %]
 
-    <link rel="stylesheet" media="screen" type="text/css" href="https://xfce.org/style/css.php?site=bugzilla" />
+    <link rel="stylesheet" media="screen" type="text/css" href="//cdn.xfce.org/style/css.php?site=bugzilla" />
 
     <script type="text/javascript" src="/skins/contrib/Xfce/scripts.js"></script>
 
